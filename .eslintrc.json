@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype"
+  ],
+  "rules": {
+    "no-unexpected-multiline": 2,
+    "no-extra-semi": 0
+  }
+}

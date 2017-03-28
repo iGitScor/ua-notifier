@@ -1,0 +1,68 @@
+{
+  "name": "ua-npmscript-notifier",
+  "version": "0.1.0",
+  "description": "Universal analytics notifier for npm scripts",
+  "main": "build/index.js",
+  "scripts": {
+    "dev:start": "UA_ID=UA-test-1 babel-node src",
+    "clean": "rimraf build && npm run flow && npm run minify",
+    "flow": "flow-remove-types  --pretty src/ --out-dir build/",
+    "minify": "babili build -d build",
+    "pretest": "eslint src && flow",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "prestart": "npm run clean",
+    "start": "NODE_ENV=production node build --event=execute",
+    "postinstall": "npm run clean && node build --event=install",
+    "postuninstall": "node build --event=uninstall",
+    "precommit": "npm test",
+    "prepush": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iGitScor/ua-notifier.git"
+  },
+  "keywords": [
+    "universal analytics",
+    "google anlytics",
+    "npm analytics",
+    "analytics",
+    "notifier",
+    "events",
+    "run script"
+  ],
+  "author": "iGitScor <sebastien.correaud@gmail.com> (http://iscor.me)",
+  "license": "MIT",
+  "homepage": "https://github.com/iGitScor/ua-notifier#readme",
+  "dependencies": {
+    "babili": "^0.0.12",
+    "flow-remove-types": "^1.2.0",
+    "immutable": "4.0.0-rc.2",
+    "minimist": "^1.2.0",
+    "read-package-json": "^2.0.5",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.0.1",
+    "redux-immutable": "^4.0.0",
+    "rimraf": "^2.6.1",
+    "universal-analytics": "^0.4.12"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-preset-env": "^1.2.2",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.42.0",
+    "husky": "^0.13.3"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=4"
+  }
+}
