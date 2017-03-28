@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iGitScor/ua-notifier.git"
+    "url": "git+https://github.com/iGitScor/ua-npmscript-notifier.git"
   },
   "keywords": [
     "universal analytics",
@@ -32,7 +32,7 @@
   ],
   "author": "iGitScor <sebastien.correaud@gmail.com> (http://iscor.me)",
   "license": "MIT",
-  "homepage": "https://github.com/iGitScor/ua-notifier#readme",
+  "homepage": "https://github.com/iGitScor/ua-npmscript-notifier#readme",
   "dependencies": {
     "babili": "^0.0.12",
     "flow-remove-types": "^1.2.0",
@@ -63,6 +63,6 @@
     "src"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   }
 }
