@@ -16,22 +16,25 @@ class Notifier {
 
   constructor(action: string = 'execute') {
     let analyticsUserIdentifier = 'UA-43265839-1';
-    if (
-      process.env.NODE_ENV === 'production' &&
-      typeof process.env.UA_ID !== 'undefined'
-    ) {
+    if (process.env.NODE_ENV === 'production' && typeof process.env.UA_ID !== 'undefined') {
       analyticsUserIdentifier = process.env.UA_ID;
     }
 
     this.action = action;
     this.visitor = ua(analyticsUserIdentifier);
-    this.dispatcher = createStore(combineReducers({
-      trigger: triggerReducer,
-    }));
+    this.dispatcher = createStore(
+      combineReducers({
+        trigger: triggerReducer,
+      }),
+    );
+  }
+
+  static getMainConfiguration(): string {
+    return path.join(path.resolve(__dirname).split('node_modules')[0], 'package.json');
   }
 
   trigger(): any {
-    readJson(path.resolve('package.json'), null, false, (error, data) => {
+    readJson(Notifier.getMainConfiguration(), null, false, (error, data) => {
       let state;
       try {
         state = this.dispatcher.dispatch(actions[this.action](), 'test');
@@ -44,7 +47,12 @@ class Notifier {
         Object.prototype.hasOwnProperty.call(state, 'payload') &&
         process.env.NODE_ENV === 'production'
       ) {
-        this.visitor.event('node', state.type, JSON.stringify(data), 0).send();
+        const rawData = JSON.parse(JSON.stringify(data));
+
+        // Delete big entries (readme)
+        delete rawData.readme;
+
+        this.visitor.event('node', state.type, JSON.stringify(rawData), 0).send();
       }
 
       return state;
