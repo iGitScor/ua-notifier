@@ -5,7 +5,7 @@ agree to abide by the [code of conduct](CODE_OF_CONDUCT.md).
 
 Fork, then clone the repo:
 
-`git clone git@github.com:your-username/ua-notifier.git`
+`git clone git@github.com:your-username/ua-npmscript-notifier.git`
 
 Make sure the tests pass:
 
@@ -17,7 +17,7 @@ Make your change. Add tests for your change. Make the tests pass:
 
 Push to your fork and [submit a pull request][pr].
 
-[pr]: https://github.com/iGitScor/ua-notifier/compare/
+[pr]: https://github.com/iGitScor/ua-npmscript-notifier/compare/
 
 At this point you're waiting on us. We like to at least comment on pull requests
 within three business days (and, typically, one business day). We may suggest
