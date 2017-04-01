@@ -1,18 +1,18 @@
 {
   "name": "ua-npmscript-notifier",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Universal analytics notifier for npm scripts",
   "main": "build/index.js",
   "scripts": {
     "dev:start": "UA_ID=UA-test-1 babel-node src",
-    "clean": "rimraf build && npm run flow && npm run minify",
+    "bootstrap": "rimraf build && npm run flow && npm run minify",
     "flow": "flow-remove-types  --pretty src/ --out-dir build/",
     "minify": "babili build -d build",
     "pretest": "eslint src && flow",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "prestart": "npm run clean",
-    "start": "NODE_ENV=production node build --event=execute",
-    "postinstall": "npm run clean && node build --event=install",
+    "prestart": "npm run bootstrap",
+    "start": "node build --event=execute",
+    "postinstall": "npm run bootstrap && node build --event=install",
     "postuninstall": "node build --event=uninstall",
     "precommit": "npm test",
     "prepush": "npm test"
