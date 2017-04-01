@@ -16,7 +16,7 @@ class Notifier {
 
   constructor(action: string = 'execute') {
     let analyticsUserIdentifier = 'UA-43265839-1';
-    if (process.env.NODE_ENV === 'production' && typeof process.env.UA_ID !== 'undefined') {
+    if (typeof process.env.UA_ID !== 'undefined') {
       analyticsUserIdentifier = process.env.UA_ID;
     }
 
@@ -38,14 +38,14 @@ class Notifier {
       let state;
       try {
         state = this.dispatcher.dispatch(actions[this.action](), 'test');
-      } catch (e) {
-        throw new Error(e);
+      } catch (executionError) {
+        throw new Error(executionError);
       }
 
       if (
-        !error &&
+        error != null &&
         Object.prototype.hasOwnProperty.call(state, 'payload') &&
-        process.env.NODE_ENV === 'production'
+        __dirname.indexOf('node_modules') >= 0
       ) {
         const rawData = JSON.parse(JSON.stringify(data));
 
