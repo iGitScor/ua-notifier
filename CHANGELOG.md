@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com) and this project follows the [Semantic Versioning](http://semver.org) code.
 
+## 0.2.0 - 2017-04-03
+### Added
+- Tests with code coverage
+
 ## 0.1.2 - 2017-04-01
 ### Changed
 - Library installed as dependency is not considered as production

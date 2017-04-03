@@ -23,4 +23,5 @@ const triggerReducer = (
   }
 };
 
-module.exports = triggerReducer;
+module.exports.initialState = initialState;
+module.exports.reducer = triggerReducer;

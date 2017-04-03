@@ -1,15 +1,17 @@
 {
   "name": "ua-npmscript-notifier",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Universal analytics notifier for npm scripts",
   "main": "build/index.js",
   "scripts": {
     "dev:start": "UA_ID=UA-test-1 babel-node src",
     "bootstrap": "rimraf build && npm run flow && npm run minify",
-    "flow": "flow-remove-types  --pretty src/ --out-dir build/",
+    "flow": "flow-remove-types --pretty src/ --out-dir build/",
     "minify": "babili build -d build",
-    "pretest": "eslint src && flow",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha",
+    "pretest": "eslint src && npm run bootstrap && flow",
+    "test": "npm run cover",
+    "posttest": "codecov",
     "prestart": "npm run bootstrap",
     "start": "node build --event=execute",
     "postinstall": "npm run bootstrap && node build --event=install",
@@ -50,14 +52,18 @@
     "babel-eslint": "^7.2.1",
     "babel-preset-env": "^1.2.2",
     "babel-preset-flow": "^6.23.0",
+    "codecov": "^2.1.0",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-flowtype": "^2.30.4",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
     "eslint-plugin-react": "^6.9.0",
+    "expect.js": "^0.3.1",
     "flow-bin": "^0.42.0",
-    "husky": "^0.13.3"
+    "husky": "^0.13.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
   },
   "files": [
     "src"
