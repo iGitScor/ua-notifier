@@ -9,5 +9,9 @@
   "rules": {
     "no-unexpected-multiline": 2,
     "no-extra-semi": 0
+  },
+  "env": {
+    "mocha": true,
+    "node": true
   }
 }

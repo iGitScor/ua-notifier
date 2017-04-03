@@ -2,7 +2,7 @@
 
 const createStore = require('redux').createStore;
 const combineReducers = require('redux-immutable').combineReducers;
-const triggerReducer = require('./reducers/notifier-reducer');
+const triggerReducer = require('./reducers/notifier-reducer').reducer;
 const actions = require('./actions/notifier-action').actions;
 
 const path = require('path');
@@ -33,29 +33,34 @@ class Notifier {
     return path.join(path.resolve(__dirname).split('node_modules')[0], 'package.json');
   }
 
-  trigger(): any {
+  notify(error: any, data: any): any {
+    let state;
+    try {
+      state = this.dispatcher.dispatch(actions[this.action](), 'test');
+    } catch (executionError) {
+      throw new Error(executionError);
+    }
+
+    if (
+      error === null &&
+      Object.prototype.hasOwnProperty.call(state, 'payload') &&
+      __dirname.indexOf('node_modules') >= 0
+    ) {
+      const rawData = JSON.parse(JSON.stringify(data));
+
+      // Delete big entries (readme)
+      delete rawData.readme;
+
+      this.visitor.event('node', state.type, JSON.stringify(rawData), 0).send();
+    }
+
+    return state;
+  }
+
+  trigger() {
+    const that = this;
     readJson(Notifier.getMainConfiguration(), null, false, (error, data) => {
-      let state;
-      try {
-        state = this.dispatcher.dispatch(actions[this.action](), 'test');
-      } catch (executionError) {
-        throw new Error(executionError);
-      }
-
-      if (
-        error != null &&
-        Object.prototype.hasOwnProperty.call(state, 'payload') &&
-        __dirname.indexOf('node_modules') >= 0
-      ) {
-        const rawData = JSON.parse(JSON.stringify(data));
-
-        // Delete big entries (readme)
-        delete rawData.readme;
-
-        this.visitor.event('node', state.type, JSON.stringify(rawData), 0).send();
-      }
-
-      return state;
+      that.notify(error, data);
     });
   }
 }
