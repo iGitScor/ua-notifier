@@ -1,5 +1,7 @@
 // @flow
 
+'use strict';
+
 const scriptParameters = require('minimist')(process.argv.slice(2));
 const Notifier = require('./notifier');
 

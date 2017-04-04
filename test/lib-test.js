@@ -1,3 +1,5 @@
+'use strict';
+
 const UANotifier = require('../build/notifier.js');
 const expect = require('expect.js');
 
@@ -23,6 +25,11 @@ describe('UA npm script notifier', () => {
 
   it('can notify', () => {
     expect(uan.notify(null, {})).to.be.an('object');
+  });
+
+  it('can have default action (execute)', () => {
+    uan = new UANotifier();
+    expect(uan.action).to.equal('execute');
   });
 
   it('throw error when command is not implemented', () => {

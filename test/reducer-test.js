@@ -1,3 +1,5 @@
+'use strict';
+
 const UANReducer = require('../build/reducers/notifier-reducer.js').reducer;
 const InitialState = require('../build/reducers/notifier-reducer.js').initialState;
 const expect = require('expect.js');

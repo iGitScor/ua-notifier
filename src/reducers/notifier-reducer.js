@@ -1,5 +1,7 @@
 // @flow
 
+'use strict';
+
 const Immutable = require('immutable');
 const INSTALL = require('../actions/notifier-action').INSTALL;
 const EXECUTE = require('../actions/notifier-action').EXECUTE;
@@ -10,7 +12,7 @@ const initialState = Immutable.fromJS({
 });
 
 const triggerReducer = (
-  state: Immutable.fromJS = initialState,
+  state: Immutable.fromJS,
   action: { type: string, payload: any },
 ) => {
   switch (action.type) {
@@ -19,7 +21,7 @@ const triggerReducer = (
     case EXECUTE:
       return state.set('message', action.payload);
     default:
-      return state;
+      return initialState;
   }
 };
 
