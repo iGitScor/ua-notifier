@@ -1,26 +1,28 @@
 // @flow
 
-const createStore = require('redux').createStore;
-const combineReducers = require('redux-immutable').combineReducers;
-const triggerReducer = require('./reducers/notifier-reducer').reducer;
-const actions = require('./actions/notifier-action').actions;
+'use strict';
 
 const path = require('path');
 const readJson = require('read-package-json');
 const ua = require('universal-analytics');
+
+const createStore = require('redux').createStore;
+const combineReducers = require('redux-immutable').combineReducers;
+const triggerReducer = require('./reducers/notifier-reducer').reducer;
+const actions = require('./actions/notifier-action').actions;
 
 class Notifier {
   action: string;
   dispatcher: any;
   visitor: any;
 
-  constructor(action: string = 'execute') {
+  constructor(action: string) {
     let analyticsUserIdentifier = 'UA-43265839-1';
     if (typeof process.env.UA_ID !== 'undefined') {
       analyticsUserIdentifier = process.env.UA_ID;
     }
 
-    this.action = action;
+    this.action = action || 'execute';
     this.visitor = ua(analyticsUserIdentifier);
     this.dispatcher = createStore(
       combineReducers({

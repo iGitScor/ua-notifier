@@ -1,3 +1,5 @@
+'use strict';
+
 const createAction = require('redux-actions').createAction;
 
 const INSTALL = 'INSTALL';
