@@ -1,6 +1,6 @@
 {
   "name": "ua-npmscript-notifier",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Universal analytics notifier for npm scripts",
   "main": "build/index.js",
   "scripts": {
