@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com) and this project follows the [Semantic Versioning](http://semver.org) code.
 
+## 0.2.2 - 2017-09-16
+### Changed
+- Update dependencies
+
 ## 0.2.1 - 2017-04-04
 ### Changed
 - Add node.js V4 compatibility
